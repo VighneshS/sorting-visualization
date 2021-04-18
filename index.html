@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta content=
+                  "width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>Sorting Visualization</title>
+</head>
+
+<body>
+<br/>
+<h1 class="header">Sorting Visualization</h1>
+<form>
+    <label for="sort-type">Type of sorting:</label>
+
+    <select id="sort-type" name="sort-type">
+        <option value="bubble_sort">Bubble sort</option>
+        <option value="insertion_sort">Insertion sort</option>
+        <option value="merge_sort">Merge sort</option>
+        <option value="heap_sort">Heap sort</option>
+        <option value="insertion_sort">Insertion sort</option>
+        <option value="selection_sort">Selection sort</option>
+    </select>
+
+    <br>
+
+    <label for="max">Maximum:
+        <input id="max" name="max" type="number" value="10" min="10" max="100" maxlength="2" onblur="checkAndReset()"
+               required>
+    </label>
+    <label for="size">Size:
+        <input id="size" name="size" type="number" value="5" min="2" max="40" maxlength="2" onblur="checkAndReset()"
+               required>
+    </label>
+    <br>
+    <label for="speed">Animation Speed in multiples x(1 or 2 or 1.5 or between 1 and 100):
+        <input id="speed" name="speed" type="number" min="1" max="100" step="0.2" value="1" onblur="checkAndReset()"
+               required>
+    </label>
+</form>
+
+<button id="generate-btn" name="generate button"
+        onclick="generateArray(document.getElementById('max').value,
+            document.getElementById('size').value)">
+    Generate
+</button>
+<button id="sort-btn" name="sort button" onclick="sort(100/document.getElementById('speed').value)">Sort</button>
+
+<br>
+<br>
+<br>
+<div class="output hide">
+    <label for="total_iterations">Total Iterations:
+        <div id="total_iterations"></div>
+    </label>
+
+    <br>
+
+    <label for="time_taken">Time taken:
+        <div id="time_taken"></div>
+    </label>
+</div>
+<div id="array"></div>
+<script src="scripts.js"></script>
+<script src="bubble_sort.js"></script>
+</body>
+
+</html>
