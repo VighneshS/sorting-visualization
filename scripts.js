@@ -114,6 +114,9 @@ function sort() {
         case "insertion_sort":
             InsertionSort(speed, saveHistory);
             break;
+        case "selection_sort":
+            SelectionSort(speed, saveHistory);
+            break;
     }
 }
 
@@ -187,16 +190,16 @@ function createHistoriesTable(histories) {
 function swap(el1, el2, delay = 100) {
     return new Promise((resolve) => {
 
-        // For exchanging styles of two blocks
-        var temp = el1.style.transform;
-        el1.style.transform = el2.style.transform;
-        el2.style.transform = temp;
-
         window.requestAnimationFrame(function () {
 
             // For waiting for .25 sec
             setTimeout(() => {
-                container.insertBefore(el2, el1);
+                var temp1 = el1.style.height;
+                var temp2 = el1.childNodes[0].innerText;
+                el1.style.height = el2.style.height;
+                el2.style.height = temp1;
+                el1.childNodes[0].innerText = el2.childNodes[0].innerText;
+                el2.childNodes[0].innerText = temp2;
                 resolve();
             }, delay);
         });
