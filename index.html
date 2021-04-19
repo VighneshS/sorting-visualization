@@ -22,7 +22,7 @@
         <option value="insertion_sort">Insertion sort</option>
         <option value="merge_sort">Merge sort</option>
         <option value="heap_sort">Heap sort</option>
-        <option value="insertion_sort">Insertion sort</option>
+        <option value="quick_sort">Quick sort</option>
         <option value="selection_sort">Selection sort</option>
     </select>
 
@@ -48,7 +48,9 @@
             document.getElementById('size').value)">
     Generate
 </button>
-<button id="sort-btn" name="sort button" onclick="sort(100/document.getElementById('speed').value)">Sort</button>
+<button id="sort-btn" name="sort button" onclick="sort()">Sort</button>
+<button id="reset-btn" name="reset button" onclick="reset_sort()">Reset</button>
+<button id="clear-hist-btn" name="clear histories button" onclick="clearHistories()">Clear Histories</button>
 
 <br>
 <br>
@@ -65,9 +67,9 @@
     </label>
 </div>
 <div id="array"></div>
-<canvas id="myCanvas">
-    Your browser does not support the canvas element.
-</canvas>
+<h6 style="margin-top: 30%;">Histories:</h6>
+<table id="hist-table" class="table">
+</table>
 <script src="scripts.js"></script>
 <script src="bubble_sort.js"></script>
 <script src="insertion_sort.js"></script>

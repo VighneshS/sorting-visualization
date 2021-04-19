@@ -1,5 +1,5 @@
 // Asynchronous BubbleSort function
-async function InsertionSort(delay = 100) {
+async function InsertionSort(delay = 100, callback) {
 
     startTimer();
     var blocks = document.querySelectorAll(".block");
@@ -18,6 +18,7 @@ async function InsertionSort(delay = 100) {
 
         // To compare value of two blocks
         while (j >= 0 && (Number(blocks[j].childNodes[0].innerHTML) > selectedElementValue)) {
+            incrementIterations();
             blocks[j].style.backgroundColor = "darkblue";
             blocks[j + 1].style.height = blocks[j].style.height;
             blocks[j + 1].childNodes[0].innerText = blocks[j].childNodes[0].innerText;
@@ -33,4 +34,5 @@ async function InsertionSort(delay = 100) {
         await syncUIDelay(delay);
     }
     stopTimer();
+    callback("insertion_sort")
 }
