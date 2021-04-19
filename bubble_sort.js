@@ -3,7 +3,6 @@ async function BubbleSort(delay = 100) {
 
     startTimer();
     var blocks = document.querySelectorAll(".block");
-    var total_iterations = 0
 
     // BubbleSort Algorithm
     for (var i = 0; i < blocks.length; i += 1) {
@@ -15,20 +14,16 @@ async function BubbleSort(delay = 100) {
             blocks[j + 1].style.backgroundColor = "#FF4949";
 
             // To wait for .1 sec
-            await new Promise((resolve) =>
-                setTimeout(() => {
-                    resolve();
-                }, delay)
-            );
+            await syncUIDelay(delay);
 
-            total_iterations_div.innerHTML = total_iterations++
+            incrementIterations();
             var value1 = Number(blocks[j].childNodes[0].innerHTML);
             var value2 = Number(blocks[j + 1]
                 .childNodes[0].innerHTML);
 
             // To compare value of two blocks
             if (value1 > value2) {
-                await swap(blocks[j], blocks[j + 1]);
+                await swap(blocks[j], blocks[j + 1], delay);
                 blocks = document.querySelectorAll(".block");
             }
 
@@ -39,30 +34,7 @@ async function BubbleSort(delay = 100) {
 
         //changing the color of greatest element
         //found in the above traversal
-        blocks[blocks.length - i - 1]
-            .style.backgroundColor = "#13CE66";
+        blocks[blocks.length - i - 1].style.backgroundColor = "#13CE66";
     }
     stopTimer();
-}
-
-
-
-// Promise to swap two blocks
-function swap(el1, el2) {
-    return new Promise((resolve) => {
-
-        // For exchanging styles of two blocks
-        var temp = el1.style.transform;
-        el1.style.transform = el2.style.transform;
-        el2.style.transform = temp;
-
-        window.requestAnimationFrame(function () {
-
-            // For waiting for .25 sec
-            setTimeout(() => {
-                container.insertBefore(el2, el1);
-                resolve();
-            }, 250);
-        });
-    });
 }
