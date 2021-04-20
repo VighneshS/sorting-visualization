@@ -117,6 +117,9 @@ function sort() {
         case "selection_sort":
             SelectionSort(speed, saveHistory);
             break;
+        case "quick_sort":
+            QuickSort(speed, saveHistory);
+            break;
     }
 }
 
@@ -219,7 +222,7 @@ function incrementIterations() {
 }
 
 function init() {
-    generateArray(100, 5);
+    generateArray(100, 40);
     var histories = memory.getItem(HISTORIES_KEY)
     if (!histories) {
         histories = []

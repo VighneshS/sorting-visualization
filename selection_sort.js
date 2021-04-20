@@ -1,9 +1,3 @@
-function printBlocks(blocks) {
-    var blocksString = ""
-    blocks.forEach(e => blocksString += e.childNodes[0].innerHTML + ",")
-    return blocksString;
-}
-
 // Asynchronous BubbleSort function
 async function SelectionSort(delay = 100, callback) {
 
