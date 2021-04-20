@@ -118,7 +118,10 @@ function sort() {
             SelectionSort(speed, saveHistory);
             break;
         case "quick_sort":
-            QuickSort(speed, saveHistory);
+            QuickSort(false, speed, saveHistory);
+            break;
+        case "three_median_quick_sort":
+            QuickSort(true, speed, saveHistory);
             break;
     }
 }
