@@ -40,5 +40,4 @@ async function mergeArray(array, start, end, mid, delay) {
         // copy back the current state of the sorting
         array.slice();
     }
-    console.log(array);
 }
