@@ -73,7 +73,7 @@ async function medianPivot(columns, low, high, delay = 100) {
     var middleValue = sortingArr[1];
 
     // swap with the last to serve as pivot
-    if (middleValue == Number(columns[low].childNodes[0].innerHTML)) {
+    if (middleValue === Number(columns[low].childNodes[0].innerHTML)) {
         columns[low].style.backgroundColor = "red";
         await swap(columns[high], columns[low], delay);
         columns = document.querySelectorAll(".block");

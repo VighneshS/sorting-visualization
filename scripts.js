@@ -1,3 +1,5 @@
+const memory = window.sessionStorage;
+
 const HISTORIES_KEY = "histories";
 const TYPE_KEY = "Sorting Type"
 const TOTAL_ITERATIONS_KEY = "Total Iterations"
@@ -6,24 +8,23 @@ const ARRAY_KEY = "Array"
 const TIME_TAKEN_KEY = "Time taken"
 const SPEED_KEY = "Animation Speed"
 
-var container = document.getElementById("array");
-var total_iterations_div = document.getElementById("total_iterations");
-var time_taken_div = document.getElementById("time_taken");
-var speed_div = document.getElementById('speed');
-var sort_type_selector = document.getElementById("sort-type");
-var histories_table = document.getElementById("hist-table");
-var result_div = document.getElementsByClassName('output hide')
+let container = document.getElementById("array");
+let total_iterations_div = document.getElementById("total_iterations");
+let time_taken_div = document.getElementById("time_taken");
+let speed_div = document.getElementById('speed');
+let sort_type_selector = document.getElementById("sort-type");
+let histories_table = document.getElementById("hist-table");
+let result_div = document.getElementsByClassName('output hide')
 
-var start;
-var timerControl;
-var unsorted_array = [];
-var total_iterations = 0;
-var memory = window.sessionStorage;
+let start;
+let timerControl;
+let unsorted_array = [];
+let total_iterations = 0;
 
 function checkAndReset() {
-    var max_val = document.getElementById('max')
-    var size_val = document.getElementById('size')
-    var speed_val = document.getElementById('speed')
+    let max_val = document.getElementById('max')
+    let size_val = document.getElementById('size')
+    let speed_val = document.getElementById('speed')
 
     max_val.value = (!max_val.value) ? parseInt(max_val.min) : (parseInt(max_val.max) < parseInt(max_val.value)) ? parseInt(max_val.max) :
         (parseInt(max_val.min) > parseInt(max_val.value)) ? parseInt(max_val.min) : parseInt(max_val.value)
@@ -45,7 +46,7 @@ function reset() {
 function generate_blocks(value, i) {
 
     // Creating element div
-    var array_ele = document.createElement("div");
+    let array_ele = document.createElement("div");
 
     // Adding class 'block' to div
     array_ele.classList.add("block");
@@ -56,7 +57,7 @@ function generate_blocks(value, i) {
 
     // Creating label element for displaying
     // size of particular block
-    var array_ele_label = document.createElement("label");
+    let array_ele_label = document.createElement("label");
     array_ele_label.classList.add("block_id");
     array_ele_label.innerText = value;
 
@@ -69,8 +70,8 @@ function generate_blocks(value, i) {
 function generateArray(max, size) {
     unsorted_array = [];
     reset();
-    for (var i = 0; i < size; i++) {
-        var value = Math.ceil(Math.random() * max);
+    for (let i = 0; i < size; i++) {
+        let value = Math.ceil(Math.random() * max);
         unsorted_array.push(value);
         generate_blocks(value, i);
     }
@@ -91,7 +92,7 @@ function output(number) {
 function startTimer() {
     start = Date.now();
     timerControl = setInterval(function () {
-        var delta = Date.now() - start; // milliseconds elapsed since start
+        let delta = Date.now() - start; // milliseconds elapsed since start
         output(delta / 1000); // in seconds
     }, 1); // update about every milli second
 }
@@ -100,46 +101,20 @@ function stopTimer() {
     clearInterval(timerControl);
 }
 
-// Calling BubbleSort function
-function sort() {
-    var speed  = 100/speed_div.value
-    total_iterations = 0
-    if (result_div.length > 0) {
-        result_div[0].classList.remove('hide');
-    }
-    switch (sort_type_selector.value) {
-        case "bubble_sort":
-            BubbleSort(speed, saveHistory);
-            break;
-        case "insertion_sort":
-            InsertionSort(speed, saveHistory);
-            break;
-        case "selection_sort":
-            SelectionSort(speed, saveHistory);
-            break;
-        case "quick_sort":
-            QuickSort(false, speed, saveHistory);
-            break;
-        case "three_median_quick_sort":
-            QuickSort(true, speed, saveHistory);
-            break;
-    }
-}
-
 function clearHistories() {
-    var histories = []
+    let histories = []
     memory.setItem(HISTORIES_KEY, histories)
     createHistoriesTable(histories)
 }
 
 function saveHistory(type) {
-    var histories = memory.getItem(HISTORIES_KEY)
+    let histories = memory.getItem(HISTORIES_KEY)
     if (!histories) {
         histories = []
     } else {
         histories = JSON.parse(histories)
     }
-    var history = {}
+    let history = {}
     history[TYPE_KEY] = type
     history[TIME_TAKEN_KEY] = time_taken_div.innerHTML
     history[TOTAL_ITERATIONS_KEY] = total_iterations_div.innerHTML
@@ -166,25 +141,25 @@ function createHistoriesTable(histories) {
     }
 
     // Create table row tr element of a table
-    var tr = histories_table.insertRow(-1);
+    let tr = histories_table.insertRow(-1);
 
-    for (var i = 0; i < cols.length; i++) {
+    for (i = 0; i < cols.length; i++) {
 
         // Create the table header th element
-        var theader = document.createElement("th");
-        theader.innerHTML = cols[i];
+        let threader = document.createElement("th");
+        threader.innerHTML = cols[i];
 
         // Append columnName to the table row
-        tr.appendChild(theader);
+        tr.appendChild(threader);
     }
 
     // Adding the data to the table
-    for (var i = 0; i < histories.length; i++) {
+    for (i = 0; i < histories.length; i++) {
 
         // Create a new row
         trow = histories_table.insertRow(-1);
-        for (var j = 0; j < cols.length; j++) {
-            var cell = trow.insertCell(-1);
+        for (let j = 0; j < cols.length; j++) {
+            let cell = trow.insertCell(-1);
 
             // Inserting the cell at particular place
             cell.innerHTML = histories[i][cols[j]];
@@ -200,8 +175,8 @@ function swap(el1, el2, delay = 100) {
 
             // For waiting for .25 sec
             setTimeout(() => {
-                var temp1 = el1.style.height;
-                var temp2 = el1.childNodes[0].innerText;
+                let temp1 = el1.style.height;
+                let temp2 = el1.childNodes[0].innerText;
                 el1.style.height = el2.style.height;
                 el2.style.height = temp1;
                 el1.childNodes[0].innerText = el2.childNodes[0].innerText;
@@ -224,9 +199,41 @@ function incrementIterations() {
     total_iterations_div.innerHTML = total_iterations++
 }
 
+// Calling BubbleSort function
+function sort() {
+    let speed = 100 / speed_div.value
+    total_iterations = 0
+    if (result_div.length > 0) {
+        result_div[0].classList.remove('hide');
+    }
+    switch (sort_type_selector.value) {
+        case "bubble_sort":
+            BubbleSort(speed, saveHistory);
+            break;
+        case "insertion_sort":
+            InsertionSort(speed, saveHistory);
+            break;
+        case "selection_sort":
+            SelectionSort(speed, saveHistory);
+            break;
+        case "quick_sort":
+            QuickSort(false, speed, saveHistory);
+            break;
+        case "three_median_quick_sort":
+            QuickSort(true, speed, saveHistory);
+            break;
+        case "merge_sort":
+            MergeSort(speed, saveHistory);
+            break;
+        case "heap_sort":
+            HeapSort(speed, saveHistory);
+            break;
+    }
+}
+
 function init() {
     generateArray(100, 40);
-    var histories = memory.getItem(HISTORIES_KEY)
+    let histories = memory.getItem(HISTORIES_KEY)
     if (!histories) {
         histories = []
     } else {
