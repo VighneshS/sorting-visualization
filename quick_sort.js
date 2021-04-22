@@ -77,7 +77,7 @@ async function medianPivot(columns, low, high, delay = 100) {
         columns[low].style.backgroundColor = "red";
         await swap(columns[high], columns[low], delay);
         columns = document.querySelectorAll(".block");
-    } else if (middleValue == Number(columns[mid].childNodes[0].innerHTML)) {
+    } else if (middleValue === Number(columns[mid].childNodes[0].innerHTML)) {
         columns[mid].style.backgroundColor = "red";
         await swap(columns[high], columns[mid], delay);
         columns = document.querySelectorAll(".block");
