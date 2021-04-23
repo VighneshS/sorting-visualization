@@ -21,6 +21,7 @@ let timerControl;
 let unsorted_array = [];
 let total_iterations = 0;
 
+// Used to reset input values if input exceeds the max an min value
 function checkAndReset() {
     let max_val = document.getElementById('max')
     let size_val = document.getElementById('size')
@@ -34,7 +35,7 @@ function checkAndReset() {
         (parseFloat(speed_val.min) > parseFloat(speed_val.value)) ? parseFloat(speed_val.min) : parseFloat(speed_val.value)
 }
 
-
+// Used to reset values UI values
 function reset() {
     document.getElementsByClassName('output')[0].classList.add('hide');
     total_iterations_div.innerHTML = ""
@@ -43,6 +44,7 @@ function reset() {
     stopTimer()
 }
 
+// Used to generate UI bar elements based on the generated array
 function generate_blocks(value, i) {
 
     // Creating element div
@@ -77,6 +79,7 @@ function generateArray(max, size) {
     }
 }
 
+// Used to reset the sorted array
 function reset_sort() {
     reset();
     unsorted_array.forEach((element, index) => {
@@ -85,10 +88,12 @@ function reset_sort() {
     );
 }
 
+// Used to output seconds value in the UI.
 function output(number) {
     time_taken_div.innerHTML = number + " seconds";
 }
 
+// Used to Start the timer.
 function startTimer() {
     start = Date.now();
     timerControl = setInterval(function () {
@@ -97,16 +102,19 @@ function startTimer() {
     }, 1); // update about every milli second
 }
 
+// Used to Stop the timer.
 function stopTimer() {
     clearInterval(timerControl);
 }
 
+// Used to Clear history table
 function clearHistories() {
     let histories = []
     memory.setItem(HISTORIES_KEY, histories)
     createHistoriesTable(histories)
 }
 
+// Used to Save history table
 function saveHistory(type) {
     let histories = memory.getItem(HISTORIES_KEY)
     if (!histories) {
@@ -126,6 +134,7 @@ function saveHistory(type) {
     createHistoriesTable(histories)
 }
 
+// Used to Create the history table
 function createHistoriesTable(histories) {
     histories_table.innerHTML = ""
     var cols = [];
@@ -167,7 +176,7 @@ function createHistoriesTable(histories) {
     }
 }
 
-// Promise to swap two blocks
+// Async function to swap two blocks
 function swap(el1, el2, delay = 100) {
     return new Promise((resolve) => {
 
@@ -187,6 +196,7 @@ function swap(el1, el2, delay = 100) {
     });
 }
 
+// Async function to create a delay while the functions are processing the UI
 async function syncUIDelay(delay) {
     await new Promise((resolve) =>
         setTimeout(() => {

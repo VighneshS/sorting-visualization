@@ -16,13 +16,12 @@ async function MergeSort(delay = 100, callback) {
 }
 
 async function mergeSort(array, start, end, delay) {
-    if (end - start <= 1) {
-        return
+    if (start < end) {
+        let mid = Math.floor((end - start) / 2)
+        await mergeSort(array, start, mid, delay)
+        await mergeSort(array, mid + 1, end, delay)
+        await mergeArray(array, start, mid, delay)
     }
-    let mid = Math.floor((end - start) / 2)
-    await mergeSort(array, start, mid, delay)
-    await mergeSort(array, mid + 1, end, delay)
-    await mergeArray(array, start, mid, delay)
 }
 
 async function mergeArray(array, start, end, mid, delay) {

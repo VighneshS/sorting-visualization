@@ -7,7 +7,7 @@ async function HeapSort(delay = 100, callback) {
     })
 }
 
-async function Heapify(n, i, delay = 100) {
+async function heapData(n, i, delay = 100) {
     var blocks = document.querySelectorAll(".block");
     var largest = i;
     var l = 2 * i + 1;
@@ -31,19 +31,21 @@ async function Heapify(n, i, delay = 100) {
         await swap(blocks[i], blocks[largest], delay);
         blocks = document.querySelectorAll(".block");
 
-        await Heapify(n, largest, delay);
+        await heapData(n, largest, delay);
     }
 }
 
 async function heapSort(columns, delay = 100) {
     for (var i = columns.length / 2 - 1; i >= 0; i--) {
-        await Heapify(columns.length - 1, i);
+        incrementIterations();
+        await heapData(columns.length - 1, i);
     }
 
     for (var i = columns.length - 1; i > 0; i--) {
+        incrementIterations();
         await swap(blocks[0], blocks[i], delay);
         blocks = document.querySelectorAll(".block");
 
-        await Heapify(i, 0, delay);
+        await heapData(i, 0, delay);
     }
 }
