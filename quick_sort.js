@@ -53,6 +53,8 @@ async function threeMedianQuickSort(columns, low, high, delay = 100) {
     if (low >= high)
         return;
 
+    await medianPivot(columns, low, high, delay)
+
     if (low < high) {
         await quickSort(columns, low, high, delay);
     }
