@@ -36,7 +36,7 @@ async function heapData(n, i, delay = 100) {
 }
 
 async function heapSort(columns, delay = 100) {
-    for (var i = columns.length / 2 - 1; i >= 0; i--) {
+    for (var i = Math.ceil(columns.length / 2 - 1); i >= 0; i--) {
         incrementIterations();
         await heapData(columns.length - 1, i);
     }
