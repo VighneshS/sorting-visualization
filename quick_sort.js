@@ -1,8 +1,8 @@
 // Asynchronous BubbleSort function
 async function QuickSort(isThreeMedian, delay = 100, callback) {
-    startTimer();
     const blocks = document.querySelectorAll(".block");
     if (!isThreeMedian) {
+        startTimer();
         quickSort(blocks, 0, blocks.length - 1, delay).then(() => {
             stopTimer();
             callback("quick_sort");
@@ -56,6 +56,7 @@ async function threeMedianQuickSort(columns, low, high, delay = 100) {
     await medianPivot(columns, low, high, delay)
 
     if (low < high) {
+        startTimer();
         await quickSort(columns, low, high, delay);
     }
 }
